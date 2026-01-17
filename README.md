@@ -62,32 +62,32 @@ docker run --name postgres-db
 _Note:_ To stop and start the container use `docker stop postgres-db` and `docker start postgres-db`.
 
 Now we can test our dbt configuration
-1. Change directory into the dbt folder: `cd jaffle_shop`
+1. Change directory into our dbt project folder: `cd jaffle_shop`
 1. Run `dbt debug`
 1. This should give a green message saying All checks passed!
 
 ### Load the raw data into PostgreSQL
-There are 3 tables we need to load into our database:
+There are 3 csv files we need to load into our database:
 * raw_customers.csv
 * raw_orders.csv
 * raw_payments.csv
 
 You could do that using a database tool like DBeaver or write your own CREATE and INSERT statements to load the csv files. Or you could take advantage of the seed functionality of dbt:
-1. Download the 3 csv files from the [jaffle_shop_duckdb git repository](https://github.com/dbt-labs/jaffle_shop_duckdb)
-1. Save them in `jaffle_shop\seeds`
+1. Download the 3 csv files from the [jaffle_shop_duckdb git repository](https://github.com/dbt-labs/jaffle_shop_duckdb) (folder seeds)
+1. Save them in your project folder `dbt-fundamentals-postgresql/jaffle_shop/seeds`
 1. Remove the `raw_` prefix of each filename
 1. Now open dbt_project.yml in your favorite editor and put the following code at the bottom of the file:
-```
-# Configuring seeds
-seeds:
-  jaffle_shop:
-    customers:
-      +schema: raw_jaffle_shop
-    orders:
-      +schema: raw_jaffle_shop
-    payments:
-      +schema: raw_stripe
-```
+    ```
+    # Configuring seeds
+    seeds:
+      jaffle_shop:
+        customers:
+          +schema: raw_jaffle_shop
+        orders:
+          +schema: raw_jaffle_shop
+        payments:
+          +schema: raw_stripe
+    ```
 1. Run `dbt seed`
 
 If all went well you should be greeted by a green message saying Completed successfully. Pay special attention to the names of the schema and table of each seed:
