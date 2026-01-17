@@ -90,17 +90,17 @@ You could do that using a database tool like DBeaver or write your own CREATE an
     ```
 1. Run `dbt seed`
 
-If all went well you should be greeted by a green message saying Completed successfully. Pay special attention to the names of the schema and table of each seed:
+If all went well you should be greeted by a green message saying Completed successfully. Pay special attention that the schema.table names of each seed matches these:
 * dbt_user_raw_jaffle_shop.customers
 * dbt_user_raw_jaffle_shop.orders
 * dbt_user_raw_stripe.payments
 
-The name of each table equals the filename (without .csv). The schema name is defined in the code we just copied into dbt_project.yml. Our dev schema (dbt_user) is prefixed to our custom seed schema. You will learn more about seeds in the dbt Fundamentals course.
+The name of each seeded table equals the filename (without .csv). The schema name is defined in the code we just copied into *dbt_project.yml*. Our dev schema (dbt_user) is prefixed to our custom seed schema. You will learn more about seeds in the dbt Fundamentals course.
  
-_Note:_ dbt Fundamentals puts the raw data in a separate database called `raw`. But PostgreSQL doesn't work out-of-the-box with cross-database references. To make it easier for ourselves, we will only use 1 database called `analytics`. We'll distinguish between raw data using the schema name.
+_Note:_ dbt Fundamentals puts these 3 raw data tables in a separate database called `raw`. But PostgreSQL doesn't work out-of-the-box with cross-database references. To make it easier for ourselves, we will only use 1 database called `analytics`. We'll distinguish between raw data and transformed data using the schema name.
 
 ## Chapter 04. Models
-The videos that need some changes are listed below. The rest of the videos you can follow along.
+Most of the videos in this chapter you can just follow along. For the videos which are listed below, you need to make some exception.
 
 ### Changes for video: Build Your First Model
 In the customers.sql file which you will copy and paste, you will see that the code refers to the raw data using the `raw` database. We need to change that to the schema name we gave them during the `dbt seed` command.
@@ -125,6 +125,16 @@ You don't need to change any code here. dbt looks up what how to reference the s
 In the video they show the SQL code which is compiled by dbt and send to the database server. You can use `dbt compile --select stg_jaffle_shop__customers`. Check that database, schema and table in the compiled SQL code is `"analytics"."dbt_user_raw_jaffle_shop"."customers"`.
 
 ### Changes for video: Source Freshness
-<TODO> Ik ben hier gebleven!
-ALTER TABLE dbt_user_raw_jaffle_shop.orders ADD COLUMN _etl_loaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
-ALTER TABLE dbt_user_raw_jaffle_shop.payments ADD COLUMN _batched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+To check the source freshness we need an extra column in the raw orders and payments tables In the course these fields are created while setting up the trial accounts for Snowflake, BigQuery or Databricks. We will do that manually now.
+
+1. Open your database tool, such as DBeaver
+1. Connect to the PostgreSQL database (using the same credentials you used when you ran `dbt init`)
+1. Execute the follow SQL statements:
+    ```
+    ALTER TABLE dbt_user_raw_jaffle_shop.orders ADD COLUMN _etl_loaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+    ALTER TABLE dbt_user_raw_stripe.payments ADD COLUMN _batched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+    ```
+
+You can follow the steps in the video now.
+
+
