@@ -4,6 +4,9 @@ sources:
     schema: dbt_user_raw_stripe
     tables:
       - name: payments
+        columns:
+          - name: id
+            data_tests: [unique, not_null]
         config:
           freshness:
             warn_after: {count: 12, period: hour}

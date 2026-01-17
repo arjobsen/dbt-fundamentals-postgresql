@@ -95,7 +95,7 @@ If all went well you should be greeted by a green message saying Completed succe
 * dbt_user_raw_jaffle_shop.orders
 * dbt_user_raw_stripe.payments
 
-The name of each seeded table equals the filename (without .csv). The schema name is defined in the code we just copied into *dbt_project.yml*. Our dev schema (dbt_user) is prefixed to our custom seed schema. You will learn more about seeds in the dbt Fundamentals course.
+The name of each seeded table equals the filename (without .csv). The schema name is defined in the code we just copied into *dbt_project.yml*. Our dev schema (dbt_user) is prefixed to our custom seed schema. Seeds are not covered in the dbt Fundamentals course, but you can read about them in the [documentation](https://docs.getdbt.com/docs/build/seeds).
  
 _Note:_ dbt Fundamentals puts these 3 raw data tables in a separate database called `raw`. But PostgreSQL doesn't work out-of-the-box with cross-database references. To make it easier for ourselves, we will only use 1 database called `analytics`. We'll distinguish between raw data and transformed data using the schema name.
 
@@ -137,4 +137,7 @@ To check the source freshness we need an extra column in the raw orders and paym
 
 You can follow the steps in the video now.
 
+## Chapter 06. Data Tests
+No changes for this chapter. Just follow the course.
 
+## Chapter 07. Documentation
