@@ -29,25 +29,25 @@ The commands shown in the guide assume you are using either bash on Linux or [Gi
 ### Initialize the dbt project folder
 1. Make sure you are in your `dbt-fundamentals` project folder and your venv is activated
 1. Run `dbt init`
-1. Enter the name of your project: jaffle_shop
-1. Input the number corresponding to the postgres database (1 by default)
-1. host: localhost
-1. port: 5432
-1. user: user
-1. pass: pass 
+1. Enter a name of your project: `jaffle_shop`
+1. Which database would you like to use? Enter the number corresponding to postgres: (`1` by default)
+1. host: `localhost`
+1. port: `5432`
+1. user: `user`
+1. pass: `pass`
     * Note you won't see your typed characters while typing
-1. dbname: analytics
-1. schema: dbt_user
-1. threads: 1
+1. dbname: `analytics`
+1. schema: `dbt_user`
+1. threads: `1`
 
 dbt now proposes to validate the connection with `dbt debug`. This will not yet work because PostgreSQL is not yet running.
 
 ### Set up PostgreSQL with Docker
 1. On Linux the easiest way to get started is to install `docker.io` from your package manager. E.g. on Debian/Ubuntu use `sudo apt install docker.io`.
 1. On Windows, we have to install Docker Desktop. And we'll do that using WSL.
-    1. [Install WSL](https://learn.microsoft.com/en-us/windows/wsl/install) by opening a PowerShell as Administration and then run `wsl --install`
-    1. Download and install [Docker Desktop for Windows](https://docs.docker.com/desktop/setup/install/windows-install/)
-    1. During the installation make sure to use WSL 2 instead of Hyper-V
+    * [Install WSL](https://learn.microsoft.com/en-us/windows/wsl/install) by opening a PowerShell as Administration and then run `wsl --install`
+    * Download and install [Docker Desktop for Windows](https://docs.docker.com/desktop/setup/install/windows-install/)
+    * During the installation make sure to use WSL 2 instead of Hyper-V
 1. Test if Docker is installed correctly using `docker --version`
 1. Create and start a new PostgreSQL container with the following command:
 ```
