@@ -1,9 +1,11 @@
 with
 orders as  (
     select * from {{ ref ('stg_jaffle_shop__orders' )}}
+--  select * from dbt_user.stg_jaffle_shop__orders
 ),
 payments as (
     select * from {{ ref ('stg_stripe__payments') }}
+--  select * from dbt_user.stg_stripe__payments
 ),
 order_payments as (
     select

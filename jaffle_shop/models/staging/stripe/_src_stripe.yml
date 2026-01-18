@@ -2,11 +2,14 @@ sources:
   - name: stripe
     database: analytics
     schema: dbt_user_raw_stripe
+    description: A clone of the Stripe data.
     tables:
       - name: payments
         columns:
           - name: id
             data_tests: [unique, not_null]
+          - name: amount
+            description: Amount in cents.
         config:
           freshness:
             warn_after: {count: 12, period: hour}

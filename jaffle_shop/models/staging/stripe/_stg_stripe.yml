@@ -1,0 +1,10 @@
+models:
+  - name: stg_stripe__payments
+    description: The grain of this table is one unique payment per row.
+    columns:
+      - name: payment_id
+        description: Primary key of the payments table.
+      - name: amount
+        description: Amount in dollars.
+      - name: payment_status
+        description: "{{ doc('payment_status') }}"

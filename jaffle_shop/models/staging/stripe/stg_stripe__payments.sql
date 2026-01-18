@@ -1,6 +1,6 @@
 with
 source as (
-    select * from{{ source('stripe', 'payments') }}
+    select * from {{ source('stripe', 'payments') }}
 --  select * from dbt_user_raw_stripe.payments
 ),
 transformed as (

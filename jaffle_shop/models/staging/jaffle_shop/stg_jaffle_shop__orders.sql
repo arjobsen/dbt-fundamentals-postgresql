@@ -1,6 +1,6 @@
 with
 source as (
-    select * from{{ source('jaffle_shop', 'orders') }}
+    select * from {{ source('jaffle_shop', 'orders') }}
 --  select * from dbt_user_raw_jaffle_shop.orders
 ),
 renamed as (

@@ -120,24 +120,33 @@ To do the practice exercise and to follow the example answer, you need to replac
 When adding `_src_jaffle_shop.yml` fill in the database `analytics` and the schema `dbt_user_raw_jaffle_shop`.
 
 ### Changes for video: References Sources in Staging Models
-You don't need to change any code here. dbt looks up what how to reference the source. 
+You don't need to change any code here. dbt looks up what how to reference the source.
 
 In the video they show the SQL code which is compiled by dbt and send to the database server. You can use `dbt compile --select stg_jaffle_shop__customers`. Check that database, schema and table in the compiled SQL code is `"analytics"."dbt_user_raw_jaffle_shop"."customers"`.
 
 ### Changes for video: Source Freshness
-To check the source freshness we need an extra column in the raw orders and payments tables In the course these fields are created while setting up the trial accounts for Snowflake, BigQuery or Databricks. We will do that manually now.
+To check for source freshness we need an extra column in the raw orders and raw payments tables. In the dbt Fundamentals course these columns are created while setting up the trial accounts for Snowflake, BigQuery or Databricks. We will do that manually now.
 
 1. Open your database tool, such as DBeaver
-1. Connect to the PostgreSQL database (using the same credentials you used when you ran `dbt init`)
-1. Execute the follow SQL statements:
+1. Connect to the PostgreSQL database (using the same credentials you used when you ran `dbt init`) if you haven't done that already
+1. Execute the following 2 SQL statements:
     ```
     ALTER TABLE dbt_user_raw_jaffle_shop.orders ADD COLUMN _etl_loaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
     ALTER TABLE dbt_user_raw_stripe.payments ADD COLUMN _batched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
     ```
+
+It's also possible to run the 2 SQL statements by executing the `psql` command directly inside the Docker container: `docker exec -it postgres-db psql -U user -d analytics`. You should see an `analytics=#` prompt. Execute the SQL statements one by one. And then exit with `exit`.
 
 You can follow the steps in the video now.
 
 ## Chapter 06. Data Tests
 No changes for this chapter. Just follow the course.
 
+_Note:_ Throughout the dbt Fundamentals course, you see git commits are made once in a while. This is optional. Git is not covered in this guide.
+
 ## Chapter 07. Documentation
+No changes for this chapter. Just follow the course.
+
+_Tip:_ You can [preview Markdown](https://code.visualstudio.com/Docs/languages/markdown#_markdown-preview) in VS Code.
+
+You can generate the documentation with `dbt docs generate`. And serve it with `dbt docs serve`. This opens a webbrowser and shows the documentation. Also the lineage can be viewed. Click on the View Lineage Graph button in the bottom right corner.
